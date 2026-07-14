@@ -1051,15 +1051,15 @@ elif step == "P2":
 
             if level == "success":
                 st.success(
-                    f"**{category}** — estimated probability {mean_p:.1%} (±{std_p:.1%})"
+                    f"**{category}** — estimated probability {mean_p:.1%} "
                 )
             elif level == "warning":
                 st.warning(
-                    f"**{category}** — estimated probability {mean_p:.1%} (±{std_p:.1%})"
+                    f"**{category}** — estimated probability {mean_p:.1%} "
                 )
             else:
                 st.error(
-                    f"**{category}** — estimated probability {mean_p:.1%} (±{std_p:.1%})"
+                    f"**{category}** — estimated probability {mean_p:.1%}"
                 )
 
             # fig = px.histogram(
