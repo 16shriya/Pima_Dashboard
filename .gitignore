@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# CatBoost
+catboost_info/
+
+# Model artifacts
+results/
+*.pkl
+*.joblib
+
+# OS
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+app.py
+
+# PyCharm
+.idea/
