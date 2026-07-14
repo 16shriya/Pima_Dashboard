@@ -37,33 +37,3 @@ pima_dashboard/
 │   └── fairness.py            # Step 8: subgroup (Age/Pregnancy) performance analysis
 └── requirements.txt
 ```
-
-## What each step demonstrates (mapped to reviewer comments)
-
-| Step | What it shows                                                               | Reviewer comment answered                           |
-| ---- | --------------------------------------------------------------------------- | --------------------------------------------------- |
-| 0    | Problem framing, end users, domain grounding                                | (context-setting)                                   |
-| 1    | Real zero/missingness counts, MAR/MNAR statistical test, correlation matrix | Rev #2/#3: manual constraints not grounded in data  |
-| 2    | Interactive EDA (histograms, boxplots, scatter)                             | (supporting evidence)                               |
-| 3    | MICE vs. median imputation, side-by-side                                    | Rev #1: stronger preprocessing rigor                |
-| 4    | Repeated stratified CV, Optuna tuning, **paired Wilcoxon test**             | Rev #3: no statistical significance testing         |
-| 5    | Calibration curve + Brier score                                             | Rev #1: probabilistic reliability                   |
-| 6    | SHAP global + local explanations                                            | (core interpretability claim)                       |
-| 7    | **Causal-DAG-propagated recourse vs. naive independent perturbation**       | Rev #2: features are physiologically interconnected |
-| 8    | Subgroup ROC-AUC/Brier by Age and Pregnancy group                           | Rev #3: fairness analysis across demographic groups |
-| 9    | Full checklist mapping table                                                | Summary for panel Q&A                               |
-
-## Notes for the panel presentation
-
-- All numbers are computed **live** from the actual CSV, not hardcoded — you can
-  change the dataset file and everything recalculates.
-- Step 4's significance test may show a **non-significant** p-value for the
-  Bayesian-optimization gain — this is expected given Pima's small size (768 rows)
-  and is worth stating honestly to the panel rather than hidden; it directly
-  demonstrates rigor rather than weakness.
-- Step 7 is the most important addition relative to the original manuscript —
-  it's a working, if simplified, answer to the sharpest reviewer critique
-  (Reviewer #2's causal-independence concern).
-- Calibration/fairness numbers shown are in-sample for interactive speed; for the
-  camera-ready numbers, swap in cross-validated out-of-fold predictions
-  (the CV infrastructure in `modeling.py` already supports this with minor changes).
