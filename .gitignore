@@ -18,10 +18,16 @@ env/
 catboost_info/
 
 # Model artifacts
-results/
-*.pkl
+# Large model artifacts
 *.joblib
 
+# Ignore all pkl except Step 4 cache
+*.pkl
+
+!results/
+!results/baseline_results.pkl
+!results/best_params.pkl
+!results/nested_results.pkl
 # OS
 .DS_Store
 Thumbs.db

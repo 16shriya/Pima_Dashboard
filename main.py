@@ -1044,9 +1044,9 @@ elif step == "P2":
                 category, level = lp.risk_category(mean_p, std_p)
 
             st.markdown("---")
-            col1, col2, col3 = st.columns(3)
+            col1, col3 = st.columns(2)
             col1.metric("Predicted risk probability", f"{mean_p:.1%}")
-            col2.metric("Uncertainty (std across 10 fold-models)", f"±{std_p:.1%}")
+            #col2.metric("Uncertainty (std across 10 fold-models)", f"±{std_p:.1%}")
             col3.metric("Category", category)
 
             if level == "success":
@@ -1062,21 +1062,21 @@ elif step == "P2":
                     f"**{category}** — estimated probability {mean_p:.1%} (±{std_p:.1%})"
                 )
 
-            fig = px.histogram(
-                x=all_probs,
-                nbins=10,
-                range_x=[0, 1],
-                title="Spread of predicted probability across 10 independently-trained fold models",
-            )
-            fig.update_layout(
-                xaxis_title="Predicted probability", yaxis_title="Number of fold-models"
-            )
-            st.plotly_chart(fig, use_container_width=True)
-            st.caption(
-                "If this spread is wide, the fold-models disagree on this patient — that's "
-                "real information, not noise to be hidden. A wide spread means treat the "
-                "point estimate with real caution."
-            )
+            # fig = px.histogram(
+            #     x=all_probs,
+            #     nbins=10,
+            #     range_x=[0, 1],
+            #     title="Spread of predicted probability across 10 independently-trained fold models",
+            # )
+            # fig.update_layout(
+            #     xaxis_title="Predicted probability", yaxis_title="Number of fold-models"
+            # )
+            # st.plotly_chart(fig, use_container_width=True)
+            # st.caption(
+            #     "If this spread is wide, the fold-models disagree on this patient — that's "
+            #     "real information, not noise to be hidden. A wide spread means treat the "
+            #     "point estimate with real caution."
+            # )
 
             st.subheader("Why did the model produce this number? (attribution only)")
             st.caption(
@@ -1231,7 +1231,7 @@ elif step == "P2":
 
             st.markdown("---")
             st.info(
-                "**Reminder of this tool's limits (matches the paper's stated limitations):** "
+                "**Reminder of this tool's limits:** "
                 "trained on a small (768-patient), single-population, single-sex dataset; "
                 "predictions reflect statistical association, not a causal mechanism; "
                 "calibration and subgroup fairness were only partially validated (see Part 1, "
