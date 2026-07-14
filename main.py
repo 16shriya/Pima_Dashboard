@@ -327,10 +327,7 @@ if step.startswith("1"):
         st.plotly_chart(fig, use_container_width=True)
 
     st.subheader("Missingness Mechanism Test (MAR vs MNAR signal)")
-    st.markdown(
-        "Tests whether *missingness itself* is statistically associated with the outcome "
-        "(MNAR-leaning) or only with other observed features (MAR-consistent)."
-    )
+
     st.dataframe(
         audit["missingness_mechanism"], use_container_width=True, hide_index=True
     )
@@ -352,8 +349,7 @@ if step.startswith("1"):
     )
     st.plotly_chart(fig, use_container_width=True)
     st.info(
-        "Glucose–Insulin (r=0.581) and BMI–SkinThickness (r=0.648) are the strongest pairs — "
-        "this is the empirical evidence base for the causal DAG used in Step 7."
+        "Glucose–Insulin (r=0.581) and BMI–SkinThickness (r=0.648) are the strongest pairs "
     )
 
 # ===========================================================================
@@ -404,16 +400,16 @@ elif step.startswith("2"):
 # ===========================================================================
 elif step.startswith("3"):
     st.title("Step 3 — Leakage-Safe Preprocessing: MICE vs Median")
-    st.markdown("""
-    **Why this matters**: the original paper used median imputation. MICE (Iterative Imputer
-    with BayesianRidge) exploits linear relationships between correlated features
-    (e.g., predicting a patient's likely Insulin from their Glucose + BMI) rather than
-    filling every missing value with the same dataset-wide number.
+    # st.markdown("""
+    # **Why this matters**: the original paper used median imputation. MICE (Iterative Imputer
+    # with BayesianRidge) exploits linear relationships between correlated features
+    # (e.g., predicting a patient's likely Insulin from their Glucose + BMI) rather than
+    # filling every missing value with the same dataset-wide number.
 
-    **Leakage-safety**: both imputers below are demonstrated on the full dataset for
-    visualization purposes only — in the actual CV pipeline (Step 4), they are refit
-    **inside every training fold** and never see validation data.
-    """)
+    # **Leakage-safety**: both imputers below are demonstrated on the full dataset for
+    # visualization purposes only — in the actual CV pipeline (Step 4), they are refit
+    # **inside every training fold** and never see validation data.
+    # """)
 
     mice_completed = get_mice_completed(df_raw)
     median_completed = get_median_completed(df_raw)
