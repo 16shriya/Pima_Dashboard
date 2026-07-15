@@ -332,10 +332,7 @@ if step.startswith("1"):
         audit["missingness_mechanism"], use_container_width=True, hide_index=True
     )
 
-    st.subheader("Outlier / Implausible Value Flags")
-    st.dataframe(audit["outliers"], use_container_width=True, hide_index=True)
-
-    st.subheader(f"Duplicate Rows: {audit['duplicates']}")
+    
 
     st.subheader("Correlation Matrix (post missing-value encoding)")
     corr = audit["correlation"]
@@ -535,36 +532,36 @@ elif step.startswith("4"):
     # Statistics
     # ----------------------------------------------------------
 
-    baseline_catboost_aucs = results["CatBoost"]["auc"][: len(optimized_aucs)]
+    # baseline_catboost_aucs = results["CatBoost"]["auc"][: len(optimized_aucs)]
 
-    sig = modeling.paired_significance_test(
-        baseline_catboost_aucs,
-        optimized_aucs,
-    )
+    # sig = modeling.paired_significance_test(
+    #     baseline_catboost_aucs,
+    #     optimized_aucs,
+    # )
 
-    st.subheader("Paired Statistical Significance Test")
+    # st.subheader("Paired Statistical Significance Test")
 
-    c1, c2, c3 = st.columns(3)
+    # c1, c2, c3 = st.columns(3)
 
-    c1.metric(
-        "Mean AUC Gain",
-        f"{sig['mean_diff']:+.4f}",
-    )
+    # c1.metric(
+    #     "Mean AUC Gain",
+    #     f"{sig['mean_diff']:+.4f}",
+    # )
 
-    c2.metric(
-        "Wilcoxon p-value",
-        f"{sig['p_value']:.4f}",
-    )
+    # c2.metric(
+    #     "Wilcoxon p-value",
+    #     f"{sig['p_value']:.4f}",
+    # )
 
-    c3.metric(
-        "Significant?",
-        "Yes" if sig["significant_at_0.05"] else "No",
-    )
+    # c3.metric(
+    #     "Significant?",
+    #     "Yes" if sig["significant_at_0.05"] else "No",
+    # )
 
-    if sig["significant_at_0.05"]:
-        st.success("Improvement is statistically significant.")
-    else:
-        st.warning("Improvement did not reach statistical significance.")
+    # if sig["significant_at_0.05"]:
+    #     st.success("Improvement is statistically significant.")
+    # else:
+    #     st.warning("Improvement did not reach statistical significance.")
 
     st.session_state["best_params"] = best_params
 # ===========================================================================
