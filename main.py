@@ -446,7 +446,7 @@ elif step.startswith("3"):
 # STEP 4 — MODELING & SIGNIFICANCE
 # ===========================================================================
 elif step.startswith("4"):
-    st.title("Step 4 — Modeling, Bayesian Optimization & Statistical Significance")
+    st.title("Step 4 — Modeling, Bayesian Optimization ")
 
     st.sidebar.markdown("### Speed controls")
     n_splits = st.sidebar.slider("CV folds", 3, 10, 5)
